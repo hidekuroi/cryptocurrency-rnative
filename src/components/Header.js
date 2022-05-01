@@ -14,7 +14,8 @@ function Header() {
 const styles = StyleSheet.create({
     headerContainer: {
         display: 'flex',
-        marginTop: 40,
+        marginTop: 35,
+        paddingBottom: 10,
         alignItems: 'center',
     },
     header: {

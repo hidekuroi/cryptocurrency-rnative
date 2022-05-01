@@ -25,7 +25,6 @@ export default function App() {
     <Provider store={Store}>
       <View>
         <Header />
-        <Text>Tessdtsst</Text>
         <CryptoContainer />
         <StatusBar style="auto" />
       </View>
