@@ -1,14 +1,15 @@
 import React, {Component, useEffect, useState} from 'react';
 import {connect, useDispatch} from 'react-redux';
-import {View, Text, FlatList, ScrollView, RefreshControl, Alert, ActivityIndicator} from 'react-native';
+import {View, Text, FlatList, ScrollView, RefreshControl, Alert, ActivityIndicator, TouchableOpacity} from 'react-native';
 import { CoinItem, getCurrency } from '../Reducers/CryptoReducer';
 import CryptoCard from './CryptoCard';
 
-const CryptoContainer = (props: any) => {
+const CryptoContainer = (props: any, {navigation}: any) => {
+    console.log(navigation)
     console.log(props.crypto.crypto)
     const dispatch = useDispatch();
     const [refreshing, setRefreshing] = useState(false)
-    const cards = props.crypto.crypto.map((i: CoinItem, index: number) => <CryptoCard key={index} data={i}/>)
+    const cards = props.crypto.crypto.map((i: CoinItem, index: number) => <TouchableOpacity onPress={() => navigation.navigate('FullData', i)}><CryptoCard key={index} data={i}/></TouchableOpacity>)
 
     useEffect(() => {
         //@ts-ignore
@@ -41,13 +42,14 @@ const CryptoContainer = (props: any) => {
     
     return(
         <View>
-        <ScrollView
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={alertfunc} />}>
-            {/* <FlatList data={props.crypto.crypto} renderItem={Item} keyExtractor={item => item.id}/> */}
-            {cards}
+            <FlatList refreshControl={<RefreshControl refreshing={refreshing} onRefresh={alertfunc} />} data={props.crypto.crypto} renderItem={({item, index}) => (
+                <TouchableOpacity onPress={() => props.navigation.navigate('FullData', item)}>
+                    <CryptoCard key={index} data={item}/>
+                </TouchableOpacity>
+            )} />
+            {/* {cards} */}
             <Text>{`\n \n \n \n \n `}
             </Text>
-        </ScrollView>
         </View>
     )
 }

@@ -3,10 +3,13 @@ import React, { useEffect } from 'react';
 import { compose } from 'redux';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider, connect, useDispatch } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
 
+import BottomTabs from './src/components/BottomTabs'
 import Store from './src/store';
 import {Header, CryptoContainer} from './src/components'
 import { getCurrency } from './src/Reducers/CryptoReducer';
+import StackNav from './StackNav';
 
 const state = Store.getState()
 
@@ -23,11 +26,13 @@ export default function App() {
 
   return (
     <Provider store={Store}>
-      <View>
-        <Header />
-        <CryptoContainer />
+      {/* <View> */}
+        {/* <Header /> */}
+        {/* <CryptoContainer /> */}
+        <StackNav />
         <StatusBar style="auto" />
-      </View>
+        {/* <BottomTabs /> */}
+      {/* </View> */}
     </Provider>
   );
 }
