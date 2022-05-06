@@ -13,7 +13,11 @@ const StackNav = () => {
     <NavigationContainer>
     <Stack.Navigator >
       <Stack.Screen name="Home" component={CryptoContainer} options={{title: 'Cryptocurrencies'}} />
-      <Stack.Screen name="FullData" component={FullData} options={{title: 'Fulldata'}}/>
+      <Stack.Screen name="FullData" component={FullData} options={({ route }) => (
+        {
+         //@ts-ignore
+        title: route.params.name 
+        })}/>
     </Stack.Navigator>
     </NavigationContainer>
 
