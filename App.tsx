@@ -11,7 +11,6 @@ import {Header, CryptoContainer} from './src/components'
 import { getCurrency } from './src/Reducers/CryptoReducer';
 import StackNav from './StackNav';
 
-const state = Store.getState()
 
 
 export default function App() {

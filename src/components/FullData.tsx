@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Alert, Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import {
   LineChart,
@@ -8,6 +8,11 @@ import {
   ContributionGraph,
   StackedBarChart
 } from "react-native-chart-kit";
+import { useDispatch, useSelector } from 'react-redux';
+import { getChartHistory } from '../Reducers/CryptoReducer';
+import { actions } from '../Reducers/CryptoReducer';
+
+const setChartHistory = actions.setChartHistory
 
 
 const styles = StyleSheet.create({
@@ -75,8 +80,11 @@ const styles = StyleSheet.create({
   }
 })
 
+
+
+
 const chartClick = (data: any) => {
-  console.log(data.value)
+  console.log(data)
   Alert.alert(
     `${data.value}`,
     "My Alert Msg",
@@ -91,7 +99,20 @@ const chartClick = (data: any) => {
   );
 }
 
+
 const FullData = (item: any) => {
+  const dispatch = useDispatch()
+  const chartHistory = useSelector((state: any) => {return state.crypto.chart})
+  console.log(chartHistory[30])
+
+useEffect(() => {
+  //@ts-ignore
+  dispatch(getChartHistory(item.route.params.id, 'usd'))
+  return () => {
+    dispatch(setChartHistory([]))
+  }
+}, [])
+
     console.log(item)
   return (
     <View>
@@ -110,24 +131,17 @@ const FullData = (item: any) => {
   <Text>Bezier Line Chart</Text>
   <LineChart
     data={{
-      labels: ["January", "February", "March", "April", "May", "June"],
+      labels: ["","","","","","","","","","","","","","","","","","","","","","","","","","", "", "", "", "Yesterday", "Today"],
       datasets: [
         {
-          data: [
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100
-          ]
+          data: chartHistory
         }
       ]
     }}
     width={Dimensions.get("window").width - 10} // from react-native
     height={220}
     yAxisLabel="$"
-    yAxisSuffix="k"
+    yAxisSuffix=""
     yAxisInterval={1} // optional, defaults to 1
     chartConfig={{
       backgroundColor: "#e26a00",
