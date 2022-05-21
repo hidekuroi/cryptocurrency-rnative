@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Alert, Dimensions, Image, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, Alert, Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import {
   LineChart,
   BarChart,
@@ -103,7 +103,7 @@ const chartClick = (data: any) => {
 const FullData = (item: any) => {
   const dispatch = useDispatch()
   const chartHistory = useSelector((state: any) => {return state.crypto.chart})
-  console.log(chartHistory[30])
+  console.log(chartHistory);
 
 useEffect(() => {
   //@ts-ignore
@@ -129,6 +129,7 @@ useEffect(() => {
         <Text style={styles.text}>{item.route.params.name}</Text>
         <View>
   <Text>Bezier Line Chart</Text>
+  {chartHistory.length > 0 ?
   <LineChart
     data={{
       labels: ["","","","","","","","","","","","","","","","","","","","","","","","","","", "", "", "", "Yesterday", "Today"],
@@ -138,7 +139,7 @@ useEffect(() => {
         }
       ]
     }}
-    width={Dimensions.get("window").width - 10} // from react-native
+    width={Dimensions.get("window").width} // from react-native
     height={220}
     yAxisLabel="$"
     yAxisSuffix=""
@@ -159,13 +160,14 @@ useEffect(() => {
         stroke: "#ffa726"
       }
     }}
-    bezier
+    
     style={{
       marginVertical: 8,
-      borderRadius: 16
+      borderRadius: 8
     }}
     onDataPointClick={chartClick}
-  />
+  />:
+  <ActivityIndicator />}
 </View>
     </View>
   )
