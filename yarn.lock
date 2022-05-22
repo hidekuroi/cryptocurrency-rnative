@@ -1414,6 +1414,11 @@
     "lodash.pick" "^4.4.0"
     "lodash.template" "^4.5.0"
 
+"@expo/vector-icons@^13.0.0":
+  "integrity" "sha512-TI+l71+5aSKnShYclFa14Kum+hQMZ86b95SH6tQUG3qZEmLTarvWpKwqtTwQKqvlJSJrpFiSFu3eCuZokY6zWA=="
+  "resolved" "https://registry.npmjs.org/@expo/vector-icons/-/vector-icons-13.0.0.tgz"
+  "version" "13.0.0"
+
 "@expo/webpack-config@0.16.20":
   "integrity" "sha512-aj83vpceXfzAVNKYMVqP+j5C/ByaZbKdR6un0swt6axsPe+Qu8gflAtOJy8LhLUGaiijX51oLncj2jKhCTrGPg=="
   "resolved" "https://registry.npmjs.org/@expo/webpack-config/-/webpack-config-0.16.20.tgz"

@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 
 const StackNav = () => {
   return (
-    <NavigationContainer>
+    // <NavigationContainer>
     <Stack.Navigator >
       <Stack.Screen name="Home" component={CryptoContainer} options={{title: 'Cryptocurrencies'}} />
       <Stack.Screen name="FullData" component={FullData} options={({ route }) => (
@@ -19,7 +19,7 @@ const StackNav = () => {
         title: route.params.name 
         })}/>
     </Stack.Navigator>
-    </NavigationContainer>
+    // </NavigationContainer>
 
   )
 }

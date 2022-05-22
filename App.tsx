@@ -4,12 +4,15 @@ import { compose } from 'redux';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider, connect, useDispatch } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import BottomTabs from './src/components/BottomTabs'
+import Settings from './src/components/Settings'
 import Store from './src/store';
-import {Header, CryptoContainer} from './src/components'
-import { getCurrency } from './src/Reducers/CryptoReducer';
 import StackNav from './StackNav';
+import { Ionicons } from '@expo/vector-icons';
+
+const Tab = createBottomTabNavigator();
 
 
 
@@ -25,13 +28,40 @@ export default function App() {
 
   return (
     <Provider store={Store}>
-      {/* <View> */}
-        {/* <Header /> */}
-        {/* <CryptoContainer /> */}
-        <StackNav />
+      <NavigationContainer>
+        <Tab.Navigator
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => {
+            if (route.name === 'Cryptocurrencies') {
+              return (
+                <Ionicons
+                  name={
+                    focused
+                      ? 'ios-stats-chart'
+                      : 'ios-stats-chart-outline'
+                  }
+                  size={size}
+                  color={color}
+                />
+              );
+            } else if (route.name === 'Settings') {
+              return (
+                <Ionicons
+                  name={focused ? 'ios-cog' : 'ios-cog-outline'}
+                  size={size}
+                  color={color}
+                />
+              );
+            }
+          },
+        })}
+        >
+          <Tab.Screen name="Cryptocurrencies" component={StackNav}  />
+          <Tab.Screen name="Settings" component={Settings} />
+        </Tab.Navigator>
         <StatusBar style="auto" />
-        {/* <BottomTabs /> */}
-      {/* </View> */}
+      </NavigationContainer>
     </Provider>
   );
 }

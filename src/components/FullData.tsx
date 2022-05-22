@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { ActivityIndicator, Alert, Dimensions, Image, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, Alert, Dimensions, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import {
   LineChart,
   BarChart,
@@ -115,7 +115,7 @@ useEffect(() => {
 
     console.log(item)
   return (
-    <View>
+    <ScrollView>
       <View style={styles.upperRow}>
         <Image source={{uri: item.route.params.image}}
             style={styles.image} />
@@ -169,7 +169,7 @@ useEffect(() => {
   />:
   <ActivityIndicator />}
 </View>
-    </View>
+    </ScrollView>
   )
 }
 

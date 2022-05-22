@@ -42,11 +42,14 @@ const CryptoContainer = (props: any, {navigation}: any) => {
     
     return(
         <View>
+            {props.crypto.crypto.length > 0 ?
             <FlatList style={{backgroundColor: "#FFF"}} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={alertfunc} />} data={props.crypto.crypto} renderItem={({item, index}) => (
                 <TouchableOpacity onPress={() => props.navigation.navigate('FullData', item)}>
                     <CryptoCard key={index} data={item}/>
                 </TouchableOpacity>
             )} />
+        :
+        <ActivityIndicator style={{marginTop: 10}}/>}
             {/* {cards} */}
             <Text>{`\n \n \n \n \n `}
             </Text>
